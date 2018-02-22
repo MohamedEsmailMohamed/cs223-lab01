@@ -1,5 +1,8 @@
 package eg.edu.alexu.csd.filestructure.sort;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Binary heap implementation.
  * 
@@ -7,6 +10,38 @@ package eg.edu.alexu.csd.filestructure.sort;
  *
  */
 public class Heap<T extends Comparable<T>> implements IHeap<T> {
+
+	private ArrayList<INode<T>> array;
+
+	private int size;
+
+	/**
+	 * Default constructor.
+	 */
+	public Heap() {
+		array = new ArrayList<INode<T>>();
+		size = 0;
+	}
+
+	/**
+	 * Copy constructor.
+	 * @param arrayIn ArrayList assumed heapified.
+	 */
+	public Heap(final ArrayList<INode<T>> arrayIn) {
+		array = arrayIn;
+	}
+
+	/**
+	 * Constructor that takes any regular collection and
+	 * generates heap with its elements.
+	 * @param arrayIn
+	 */
+	public Heap(final Collection<T> arrayIn) {
+		array = new ArrayList<INode<T>>();
+		for (T element : arrayIn) {
+			insert(element);
+		}
+	}
 
 	@Override
 	public INode<T> getRoot() {
