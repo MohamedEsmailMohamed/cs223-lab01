@@ -11,16 +11,16 @@ import java.util.Collection;
  */
 public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
+	/**
+	 * The ArrayList that holds the nodes of the p
+	 */
 	private ArrayList<INode<T>> array;
-
-	private int size;
 
 	/**
 	 * Default constructor.
 	 */
 	public Heap() {
 		array = new ArrayList<INode<T>>();
-		size = 0;
 	}
 
 	/**
@@ -37,22 +37,17 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 	 * @param arrayIn
 	 */
 	public Heap(final Collection<T> arrayIn) {
-		array = new ArrayList<INode<T>>();
-		for (T element : arrayIn) {
-			insert(element);
-		}
+		build(arrayIn);
 	}
 
 	@Override
 	public INode<T> getRoot() {
-		// TODO Auto-generated method stub
-		return null;
+		return array.get(0);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return array.size();
 	}
 
 	@Override
@@ -75,8 +70,10 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
 	@Override
 	public void build(java.util.Collection<T> unordered) {
-		// TODO Auto-generated method stub
-
+		array = new ArrayList<INode<T>>();
+		for (T element : unordered) {
+			insert(element);
+		}
 	}
 
 }
