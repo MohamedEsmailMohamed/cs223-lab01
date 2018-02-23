@@ -5,7 +5,7 @@ import java.util.Collection;
 
 /**
  * Binary heap implementation.
- * 
+ *
  * @author H
  *
  */
@@ -115,7 +115,7 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 	public void build(java.util.Collection<T> unordered) {
 		if (unordered == null) {
 			throw new IllegalArgumentException("Can't build heap with null.");
-		} else {			
+		} else {
 			array = new ArrayList<INode<T>>();
 			for (T element : unordered) {
 				insert(element);
