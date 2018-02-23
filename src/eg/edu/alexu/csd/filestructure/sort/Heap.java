@@ -64,13 +64,22 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 				node = parent;
 			}
 
-			while (node.getLeftChild() != null // Heapifying down.
+			while (node.getLeftChild() != null) { // Heapifying down.
+				if (node.getValue().compareTo(
+						node.getLeftChild().getValue()
+						) < 0) { // Smaller than left child.
+					INode<T> child = node.getLeftChild();
+					swap(child, node);
+					node = child;
+			} else if (node.getRightChild() != null
 					&& node.getValue().compareTo(
-							node.getLeftChild().getValue()
-							) < 0) { // Smaller than left child.
-				INode<T> child = node.getLeftChild();
+					node.getRightChild().getValue()
+					) < 0) { // Smaller than left child.
+				INode<T> child = node.getRightChild();
 				swap(child, node);
 				node = child;
+			} else { // Greater than both children if exist.
+				break;
 			}
 		}
 	}
