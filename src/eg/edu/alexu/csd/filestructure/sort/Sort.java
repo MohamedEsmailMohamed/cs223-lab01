@@ -1,11 +1,8 @@
 package eg.edu.alexu.csd.filestructure.sort;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
-import com.sun.org.apache.bcel.internal.generic.INEG;
-import sun.net.www.content.text.Generic;
-
-import java.lang.reflect.Array;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ISort implementation.
@@ -35,8 +32,8 @@ public class Sort implements ISort {
     //Merge sort O(nlogn).
     @Override
     public void sortFast(ArrayList unordered) {
-
-       unordered =  mergeSort(unordered);
+       unordered = (ArrayList) mergeSort(unordered);
+       System.out.println(unordered);
     }
 
     /**
@@ -57,25 +54,25 @@ public class Sort implements ISort {
     /**
      * Recursive method for merge sort.
      * @param unordered
-     *                  arrayList to be sorted.
+     *                  List to be sorted.
      * @return
-     *          the sorted arraylist.
+     *          the sorted list.
      */
-    private ArrayList mergeSort(ArrayList unordered) {
+    private List mergeSort(List unordered) {
         if(unordered.size() == 1) { //base case.
             return unordered;
         }
 
         //divide.
         int median = unordered.size() / 2;
-        ArrayList leftPart = (ArrayList)unordered.subList(0, median);
-        ArrayList rightPart = (ArrayList)unordered.subList( median + 1, unordered.size());
+        List leftPart = unordered.subList(0, median);
+        List rightPart = unordered.subList( median, unordered.size());
 
         //recursive.
         leftPart = mergeSort(leftPart);
         rightPart = mergeSort(rightPart);
 
-        //conquer.
+        //conquer.https://stackoverflow.com/questions/34783815/java-recursive-mergesort-for-arraylists
         return merge(leftPart, rightPart);
     }
 
@@ -88,7 +85,7 @@ public class Sort implements ISort {
      * @return
      *         the merged arraylist.
      */
-    private ArrayList merge(ArrayList left, ArrayList right) {
+    private ArrayList merge(List left, List right) {
         ArrayList mergedArray = new ArrayList(left.size() + right.size());
         int leftCounter, rightCounter;
         leftCounter = rightCounter = 0;
@@ -105,7 +102,7 @@ public class Sort implements ISort {
             mergedArray.add(left.get(leftCounter++));
         }
         while(rightCounter < right.size()) {
-            mergedArray.add(left.get(rightCounter++));
+            mergedArray.add(right.get(rightCounter++));
         }
         return mergedArray;
     }
