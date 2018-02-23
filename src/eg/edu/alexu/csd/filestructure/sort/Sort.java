@@ -2,11 +2,9 @@ package eg.edu.alexu.csd.filestructure.sort;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ISort implementation.
- *
  */
 public class Sort implements ISort {
     @Override
@@ -32,18 +30,15 @@ public class Sort implements ISort {
     //Merge sort O(nlogn).
     @Override
     public void sortFast(ArrayList unordered) {
-       unordered = (ArrayList) mergeSort(unordered);
-       System.out.println(unordered);
+        mergeSort(unordered);
     }
 
     /**
-     * Swaps the given to values in the given arraylist.
-     * @param unordered
-     *                  given arraylist.
-     * @param first
-     *              first value.
-     * @param second
-     *              second value.
+     * Swaps the given to values in the given arrayArrayList.
+     *
+     * @param unordered given arrayArrayList.
+     * @param first     first value.
+     * @param second    second value.
      */
     private void swap(ArrayList unordered, int first, int second) {
         Object temp = unordered.get(first);
@@ -53,57 +48,59 @@ public class Sort implements ISort {
 
     /**
      * Recursive method for merge sort.
-     * @param unordered
-     *                  List to be sorted.
-     * @return
-     *          the sorted list.
+     *
+     * @param unordered ArrayList to be sorted.
+     * @return the sorted ArrayList.
      */
-    private List mergeSort(List unordered) {
-        if(unordered.size() == 1) { //base case.
-            return unordered;
+    private void mergeSort(ArrayList unordered) {
+        if (unordered.size() == 1) { //base case.
+            return;
         }
 
         //divide.
         int median = unordered.size() / 2;
-        List leftPart = unordered.subList(0, median);
-        List rightPart = unordered.subList( median, unordered.size());
+        ArrayList leftPart = new ArrayList();
+        ArrayList rightPart = new ArrayList();
+        for(int i = 0; i < unordered.size(); i++) {
+            if(i < median) {
+                leftPart.add(unordered.get(i));
+            } else {
+                rightPart.add(unordered.get(i));
+            }
+        }
 
         //recursive.
-        leftPart = mergeSort(leftPart);
-        rightPart = mergeSort(rightPart);
+        mergeSort(leftPart);
+        mergeSort(rightPart);
 
-        //conquer.https://stackoverflow.com/questions/34783815/java-recursive-mergesort-for-arraylists
-        return merge(leftPart, rightPart);
+        //conquer.
+        merge(leftPart, rightPart, unordered);
     }
 
     /**
-     * Sorts and merges two given arraylists into one.
-     * @param left
-     *              first arraylist to be sorted.
-     * @param right
-     *              second arraylist to be sorted.
-     * @return
-     *         the merged arraylist.
+     * Sorts and merges two given ArrayLists into one.
+     *
+     * @param left  first ArrayList to be sorted.
+     * @param right second ArrayList to be sorted.
+     * @return the merged ArrayList.
      */
-    private ArrayList merge(List left, List right) {
-        ArrayList mergedArray = new ArrayList(left.size() + right.size());
-        int leftCounter, rightCounter;
-        leftCounter = rightCounter = 0;
+    private void merge(ArrayList left, ArrayList right, ArrayList unordered) {
+        int leftCounter, rightCounter, mergedCounter;
+        leftCounter = rightCounter = mergedCounter = 0;
         while (leftCounter < left.size() && rightCounter < right.size()) {
             //greater than.
-            if(((Comparable) left.get(leftCounter))
+            if (((Comparable) left.get(leftCounter))
                     .compareTo(right.get(rightCounter)) > 0) {
-                mergedArray.add(right.get(rightCounter++));
+                unordered.set(mergedCounter++, right.get(rightCounter++));
             } else {
-                mergedArray.add(left.get(leftCounter++));
+                unordered.set(mergedCounter++, left.get(leftCounter++));
             }
         }
-        while(leftCounter < left.size()) {
-            mergedArray.add(left.get(leftCounter++));
+        while (leftCounter < left.size()) {
+            unordered.set(mergedCounter++, left.get(leftCounter++));
         }
-        while(rightCounter < right.size()) {
-            mergedArray.add(right.get(rightCounter++));
+        while (rightCounter < right.size()) {
+            unordered.set(mergedCounter++, right.get(rightCounter++));
         }
-        return mergedArray;
     }
 }

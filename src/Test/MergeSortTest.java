@@ -22,7 +22,6 @@ public class MergeSortTest {
             array.add(unsortedArray[i]);
         }
         mISort.sortFast(array);
-        System.out.println(array);
         for(int i = 0; i < sortedArray.length; i++) {
             Assert.assertEquals(array.get(i), sortedArray[i]);
         }
