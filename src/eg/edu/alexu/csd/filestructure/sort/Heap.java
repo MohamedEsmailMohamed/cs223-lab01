@@ -105,7 +105,7 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
             throw new IllegalArgumentException("Insertion of null.");
         } else {
             final int index = array.size();
-            INode<T> node = new HNode<T>(array, element, index);
+            INode<T> node = new ArrayHeapNode<T>(array, index, element);
             array.add(node);
             heapify(node);
         }
