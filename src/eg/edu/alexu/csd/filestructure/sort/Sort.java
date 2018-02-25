@@ -10,12 +10,14 @@ public class Sort<T extends Comparable<T>> implements ISort {
     @Override
     public IHeap<T> heapSort(ArrayList unordered) {
         Heap<T> heap = new Heap(unordered);
+        Heap<T> heap2 = new Heap((ArrayList) unordered.clone());
         unordered.clear();
         T element = heap.extract();
         while (element != null) {
             unordered.add(0, element);
             element = heap.extract();
         }
+        return heap2;
     }
 
     //Bubble sort O(n^2).
