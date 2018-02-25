@@ -101,10 +101,11 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
             return null;
         } else {
             int lastIndex = array.size() - 1;
+            T returner = maxNode.getValue();
             swap(maxNode, array.get(lastIndex));
             array.remove(lastIndex--); // Size decreases due to removal.
             heapify(maxNode);
-            return maxNode.getValue();
+            return returner;
         }
     }
 
