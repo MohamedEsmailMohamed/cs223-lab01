@@ -6,10 +6,10 @@ import java.util.ArrayList;
 /**
  * ISort implementation.
  */
-public class Sort<T> implements ISort {
+public class Sort<T extends Comparable<T>> implements ISort {
     @Override
-    public IHeap heapSort(ArrayList unordered) {
-        Heap heap = new Heap(unordered);
+    public IHeap<T> heapSort(ArrayList unordered) {
+        Heap<T> heap = new Heap(unordered);
         unordered.clear();
         T element = heap.extract();
         while (element != null) {
