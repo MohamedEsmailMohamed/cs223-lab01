@@ -6,10 +6,16 @@ import java.util.ArrayList;
 /**
  * ISort implementation.
  */
-public class Sort implements ISort {
+public class Sort<T> implements ISort {
     @Override
     public IHeap heapSort(ArrayList unordered) {
-        return null;
+        Heap heap = new Heap(unordered);
+        unordered.clear();
+        T element = heap.extract();
+        while (element != null) {
+            unordered.add(0, element);
+            element = heap.extract();
+        }
     }
 
     //Bubble sort O(n^2).
