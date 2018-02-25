@@ -45,6 +45,9 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
     @Override
     public INode<T> getRoot() {
+        if (array == null || array.size() == 0) {
+            return null;
+        }
         return array.get(0);
     }
 
@@ -90,6 +93,9 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
     @Override
     public T extract() {
+        if (array == null || array.size() == 0) {
+            return null;
+        }
         final INode<T> maxNode = array.get(0); // Always holds extremest value.
         if (maxNode == null) {
             return null;
