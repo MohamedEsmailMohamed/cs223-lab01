@@ -1,4 +1,7 @@
-package eg.edu.alexu.csd.filestructure.sort;
+package eg.edu.alexu.csd.filestructure.sort.cs34;
+
+import eg.edu.alexu.csd.filestructure.sort.IHeap;
+import eg.edu.alexu.csd.filestructure.sort.INode;
 
 import java.util.ArrayList;
 import java.util.Collection;
