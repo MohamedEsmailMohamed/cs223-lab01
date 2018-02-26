@@ -48,8 +48,8 @@ public class Sort<T extends Comparable<T>> implements ISort {
      * @param first     first value.
      * @param second    second value.
      */
-    private void swap(ArrayList unordered, int first, int second) {
-        Object temp = unordered.get(first);
+    private void swap(ArrayList<T> unordered, int first, int second) {
+        T temp = unordered.get(first);
         unordered.set(first, unordered.get(second));
         unordered.set(second, temp);
     }
