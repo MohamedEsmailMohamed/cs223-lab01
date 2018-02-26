@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/sort/cs34/Heap.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+              <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -342,7 +342,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6318000" />
+    <option name="totallyTimeSpent" value="6434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="293" y="53" width="1853" height="1055" extended-state="6" />
@@ -517,7 +517,7 @@
     <entry file="file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/sort/cs34/Heap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
           <folding />
         </state>
       </provider>

@@ -17,7 +17,7 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
     /**
      * The ArrayList that holds the nodes of the p
      */
-    public ArrayList<INode<T>> array;
+    private ArrayList<INode<T>> array;
 
     /**
      * Default constructor.
