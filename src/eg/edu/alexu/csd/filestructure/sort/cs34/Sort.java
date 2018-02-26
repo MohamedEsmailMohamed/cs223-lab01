@@ -1,16 +1,19 @@
-package eg.edu.alexu.csd.filestructure.sort;
+package eg.edu.alexu.csd.filestructure.sort.cs34;
 
-import java.awt.*;
+import eg.edu.alexu.csd.filestructure.sort.ISort;
+import eg.edu.alexu.csd.filestructure.sort.IHeap;
+
 import java.util.ArrayList;
 
 /**
  * ISort implementation.
  */
-public class Sort<T extends Comparable<T>> implements ISort {
-    @Override
-    public IHeap<T> heapSort(ArrayList unordered) {
-        Heap<T> heap = new Heap(unordered);
-        Heap<T> heap2 = new Heap((ArrayList) unordered.clone());
+public class Sort<T extends Comparable<T>> implements ISort<T> {
+    @SuppressWarnings("unchecked")
+	@Override
+    public IHeap<T> heapSort(ArrayList<T> unordered) {
+        Heap<T> heap = new Heap<T>(unordered);
+        Heap<T> heap2 = new Heap<T>((ArrayList<T>) unordered.clone());
         unordered.clear();
         T element = heap.extract();
         while (element != null) {
@@ -22,12 +25,12 @@ public class Sort<T extends Comparable<T>> implements ISort {
 
     //Bubble sort O(n^2).
     @Override
-    public void sortSlow(ArrayList unordered) {
+    public void sortSlow(ArrayList<T> unordered) {
 
         for (int i = 0; i < unordered.size() - 1; i++) {
             for (int j = 0; j < unordered.size() - 1; j++) {
                 //greater than.
-                if (((Comparable) unordered.get(j))
+                if (unordered.get(j)
                         .compareTo(unordered.get(j + 1)) > 0) {
                     swap(unordered, j, j + 1);
                 }
@@ -37,7 +40,7 @@ public class Sort<T extends Comparable<T>> implements ISort {
 
     //Merge sort O(nlogn).
     @Override
-    public void sortFast(ArrayList unordered) {
+    public void sortFast(ArrayList<T> unordered) {
         mergeSort(unordered);
     }
 
@@ -60,15 +63,15 @@ public class Sort<T extends Comparable<T>> implements ISort {
      * @param unordered ArrayList to be sorted.
      * @return the sorted ArrayList.
      */
-    private void mergeSort(ArrayList unordered) {
+    private void mergeSort(ArrayList<T> unordered) {
         if (unordered.size() == 1) { //base case.
             return;
         }
 
         //divide.
         int median = unordered.size() / 2;
-        ArrayList leftPart = new ArrayList();
-        ArrayList rightPart = new ArrayList();
+        ArrayList<T> leftPart = new ArrayList<T>();
+        ArrayList<T> rightPart = new ArrayList<T>();
         for(int i = 0; i < unordered.size(); i++) {
             if(i < median) {
                 leftPart.add(unordered.get(i));
@@ -92,12 +95,12 @@ public class Sort<T extends Comparable<T>> implements ISort {
      * @param right second ArrayList to be sorted.
      * @return the merged ArrayList.
      */
-    private void merge(ArrayList left, ArrayList right, ArrayList unordered) {
+    private void merge(ArrayList<T> left, ArrayList<T> right, ArrayList<T> unordered) {
         int leftCounter, rightCounter, mergedCounter;
         leftCounter = rightCounter = mergedCounter = 0;
         while (leftCounter < left.size() && rightCounter < right.size()) {
             //greater than.
-            if (((Comparable) left.get(leftCounter))
+            if (left.get(leftCounter)
                     .compareTo(right.get(rightCounter)) > 0) {
                 unordered.set(mergedCounter++, right.get(rightCounter++));
             } else {

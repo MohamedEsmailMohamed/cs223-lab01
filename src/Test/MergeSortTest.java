@@ -1,7 +1,7 @@
 package Test;
 
 import eg.edu.alexu.csd.filestructure.sort.ISort;
-import eg.edu.alexu.csd.filestructure.sort.Sort;
+import eg.edu.alexu.csd.filestructure.sort.cs34.Sort;
 import org.junit.Assert;
 import org.junit.Test;
 

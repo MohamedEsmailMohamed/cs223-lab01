@@ -1,4 +1,7 @@
-package eg.edu.alexu.csd.filestructure.sort;
+package eg.edu.alexu.csd.filestructure.sort.cs34;
+
+import eg.edu.alexu.csd.filestructure.sort.IHeap;
+import eg.edu.alexu.csd.filestructure.sort.INode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +45,9 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
     @Override
     public INode<T> getRoot() {
+        if (array == null || array.size() == 0) {
+            return null;
+        }
         return array.get(0);
     }
 
@@ -87,15 +93,21 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
 
     @Override
     public T extract() {
+        if (array == null || array.size() == 0) {
+            return null;
+        }
         final INode<T> maxNode = array.get(0); // Always holds extremest value.
         if (maxNode == null) {
             return null;
         } else {
             int lastIndex = array.size() - 1;
+            T returner = maxNode.getValue();
             swap(maxNode, array.get(lastIndex));
             array.remove(lastIndex--); // Size decreases due to removal.
-            heapify(maxNode);
-            return maxNode.getValue();
+            if (array.size() > 1) {
+            	heapify(maxNode);
+            }
+            return returner;
         }
     }
 
@@ -139,4 +151,4 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
         node2.setValue(swapper);
     }
 
-	}
+}
