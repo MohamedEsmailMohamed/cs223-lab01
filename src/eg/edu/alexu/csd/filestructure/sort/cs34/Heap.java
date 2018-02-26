@@ -17,7 +17,7 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
     /**
      * The ArrayList that holds the nodes of the p
      */
-    private ArrayList<INode<T>> array;
+    public ArrayList<INode<T>> array;
 
     /**
      * Default constructor.
@@ -71,20 +71,23 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
             }
 
             while (node.getLeftChild() != null) { // Heapifying down.
+                INode<T> higherChild = null;
+                 // Find higher child.
+                if (node.getRightChild() != null) {
+                    higherChild =
+                            node.getLeftChild().getValue().compareTo(
+                                    node.getRightChild().getValue()
+                            ) > 0 ? node.getLeftChild() : node.getRightChild();
+                } else {
+                    higherChild = node.getLeftChild();
+                }
+
                 if (node.getValue().compareTo(
-                        node.getLeftChild().getValue()
-                        ) < 0) { // Smaller than left child.
-                    INode<T> child = node.getLeftChild();
-                    swap(child, node);
-                    node = child;
-                } else if (node.getRightChild() != null
-                        && node.getValue().compareTo(
-                        node.getRightChild().getValue()
-                        ) < 0) { // Smaller than left child.
-                    INode<T> child = node.getRightChild();
-                    swap(child, node);
-                    node = child;
-                } else { // Greater than both children if exist.
+                        higherChild.getValue()
+                ) < 0) {
+                    swap(higherChild, node);
+                    node = higherChild;
+                } else {
                     break;
                 }
             }
@@ -134,6 +137,7 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
                 insert(element);
             }
         }
+
     }
 
     /**
