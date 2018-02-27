@@ -141,6 +141,87 @@ public class Heap<T extends Comparable<T>> implements IHeap<T> {
     }
 
     /**
+     * Returns a deep clone of this heap.
+     * The values of the nodes are copied by reference.
+     *
+     * @return a clone of this heap
+     */
+    public IHeap<T> clone() {
+        IHeap<T> heap = new Heap<T>();
+        ((Heap<T>) heap).array = new ArrayList<INode<T>>(this.array.size());
+        ArrayList<INode<T>> heapArray = ((Heap<T>) heap).array;
+
+        for (INode<T> node : this.array) {
+            heapArray.add(new ArrayHeapNode<T>(
+                        heapArray, heapArray.size(), node.getValue()));
+        }
+
+        return heap;
+    }
+
+    /**
+     * Percolates a node up to maintain the min-heap property.
+     *
+     * @param target node to percolate up
+     */
+    public void percolateUp(final INode<T> target) {
+        INode<T> node = target;
+        INode<T> parent = node.getParent();
+        while (parent != null
+                && ((ArrayHeapNode<T>) node).isLessThan(parent)) {
+            swap(node, parent);
+            node = parent;
+            parent = node.getParent();
+        }
+    }
+
+    /**
+     * Builds a min-heap from the given collection of values.
+     *
+     * @param unordered the collection of values to build the heap from
+     * @return this Heap after building
+     */
+    public IHeap<T> buildMinHeap(final java.util.Collection<T> unordered) {
+        if (unordered == null) {
+            throw new IllegalArgumentException("Can't build heap with null.");
+        } else {
+            array = new ArrayList<INode<T>>(unordered.size());
+
+            for (T element : unordered) {
+                INode<T> node = new ArrayHeapNode<T>(
+                            array, array.size(), element);
+                array.add(node);
+                percolateUp(node);
+
+                // Ensure that left child <= right child
+                INode<T> parent = node.getParent();
+                if (parent != null && parent.getRightChild() != null) {
+                    INode<T> leftChild = parent.getLeftChild();
+                    INode<T> rightChild = parent.getRightChild();
+                    if (((ArrayHeapNode<T>) rightChild).isLessThan(leftChild)) {
+                        swap(leftChild, rightChild);
+                    }
+                }
+            }
+
+            return this;
+        }
+    }
+
+    /**
+     * Returns an array of values representing the heap.
+     *
+     * @return an ArrayList<T> representing the heap
+     */
+    public ArrayList<T> getValues() {
+        ArrayList<T> valuesArray = new ArrayList<T>(this.array.size());
+        for (INode<T> node : this.array) {
+            valuesArray.add(node.getValue());
+        }
+        return valuesArray;
+    }
+
+    /**
      * Swapping algorithm for the values in nodes.
      * Simply swaps the values in the two nodes but keeps
      * the two nodes in place as they are position
