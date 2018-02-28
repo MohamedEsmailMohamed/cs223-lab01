@@ -112,4 +112,16 @@ public class ArrayHeapNode<T extends Comparable<T>> implements INode<T> {
     public void setValue(final T newValue) {
         this.value = newValue;
     }
+
+    /**
+     * Returns true if the value of this node is less than
+     * that of the given node.
+     *
+     * @param target node to compare to
+     * @return true if the value of this node is less than
+     * that of the given node
+     */
+    public boolean isLessThan(final INode<T> target) {
+        return this.value.compareTo(target.getValue()) < 0;
+    }
 }
