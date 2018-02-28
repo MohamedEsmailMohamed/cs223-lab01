@@ -13,7 +13,11 @@ public class Sort<T extends Comparable<T>> implements ISort<T> {
 	@Override
     public IHeap<T> heapSort(ArrayList<T> unordered) {
         Heap<T> heap = new Heap<T>(unordered);
-        Heap<T> heap2 = new Heap<T>((ArrayList<T>) unordered.clone());
+        //Heap<T> heap2 = new Heap<T>((ArrayList<T>) unordered.clone());
+        Heap<T> heap2 = new Heap<T>();
+        for (T clone : unordered) {
+            heap2.insert(clone);
+        }
         unordered.clear();
         T element = heap.extract();
         while (element != null) {
@@ -70,15 +74,10 @@ public class Sort<T extends Comparable<T>> implements ISort<T> {
 
         //divide.
         int median = unordered.size() / 2;
-        ArrayList<T> leftPart = new ArrayList<T>();
-        ArrayList<T> rightPart = new ArrayList<T>();
-        for(int i = 0; i < unordered.size(); i++) {
-            if(i < median) {
-                leftPart.add(unordered.get(i));
-            } else {
-                rightPart.add(unordered.get(i));
-            }
-        }
+        ArrayList<T> leftPart = new ArrayList<T>(unordered.subList(
+                0, median));
+        ArrayList<T> rightPart = new ArrayList<T>(unordered.subList
+                (median, unordered.size()));
 
         //recursive.
         mergeSort(leftPart);
