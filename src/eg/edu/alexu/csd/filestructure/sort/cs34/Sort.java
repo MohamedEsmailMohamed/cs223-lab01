@@ -1,30 +1,35 @@
 package eg.edu.alexu.csd.filestructure.sort.cs34;
 
-import eg.edu.alexu.csd.filestructure.sort.ISort;
 import eg.edu.alexu.csd.filestructure.sort.IHeap;
+import eg.edu.alexu.csd.filestructure.sort.INode;
+import eg.edu.alexu.csd.filestructure.sort.ISort;
 
 import java.util.ArrayList;
 
 /**
  * ISort implementation.
+ *
+ * @param <T> type of node values
  */
 public class Sort<T extends Comparable<T>> implements ISort<T> {
-    @SuppressWarnings("unchecked")
-	@Override
-    public IHeap<T> heapSort(ArrayList<T> unordered) {
+    @Override
+    public final IHeap<T> heapSort(final ArrayList<T> unordered) {
         Heap<T> heap = new Heap<T>(unordered);
-        //Heap<T> heap2 = new Heap<T>((ArrayList<T>) unordered.clone());
-        Heap<T> heap2 = new Heap<T>();
-        for (T clone : unordered) {
-            heap2.insert(clone);
-        }
         unordered.clear();
+
         T element = heap.extract();
         while (element != null) {
             unordered.add(0, element);
             element = heap.extract();
         }
-        return heap2;
+
+        ArrayList<INode<T>> heapArray =
+            new ArrayList<INode<T>>(unordered.size());
+        for (T val : unordered) {
+            heapArray.add(
+                    new ArrayHeapNode<T>(heapArray, heapArray.size(), val));
+        }
+        return new Heap<T>(heapArray);
     }
 
     //Bubble sort O(n^2).
